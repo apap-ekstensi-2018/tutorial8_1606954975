@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Index</title>
+	<link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+</head>
+	<body>
+		<div th:replace="fragments/fragments :: header"></div>
+		<h2>Welcome  to APAP Tutorial 8 </h2>
+		<a href="/login">Login</a>
+		<a th:if="${#httpServletRequest.isUserInRole('ADMIN') or #httpServletRequest.isUserInRole('USER')}" href="/student/viewall">View All Student</a><br>
+		<a th:if="${#httpServletRequest.isUserInRole('USER')}">
+			<form action="/student/view" method="get">
+				<input type="text" name="npm"/>
+				<button type="submit">Search</button>
+
+			</form>
+		</a>
+		<div th:replace="fragments/fragments :: footer"></div>
+	</body>
+</html>

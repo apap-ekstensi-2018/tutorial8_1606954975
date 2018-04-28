@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:type="http://www.w3.org/1999/xhtml">
+    <head>
+        <title>View All Students</title>
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap.css">
+        <link rel="stylesheet" type="text/css" href="/css/jquery.dataTables.min.css">
+        <script src="/js/jquery-3.3.1.js"></script>
+        <script src="/js/jquery.dataTables.min.js"></script>
+        <script>
+        		$(document).ready( function () {
+			    $('#tableStudent').DataTable();
+			} );
+        </script>
+    </head>
+    <body>
+    <div th:replace="fragments/fragments :: header"></div>
+	<h2 th:text=" 'Login as ' + ${#httpServletRequest.remoteUser}">Login as</h2>
+	<form th:action="@{/logout}" method="post">
+		<input type="submit" value="Sign Out" />
+	</form>
+    <h1>All Students</h1>
+        <table id="tableStudent">
+		<thead>
+			<tr>
+				<th>No</th>
+				<th>NPM</th>
+				<th>Name</th>
+				<th>GPA</th>
+				<th>Status</th>
+				<th></th>
+			</tr>	
+		</thead>
+		<tbody>
+		<div th:each="student,iterationStatus: ${students}" th:class="${iterationStatus.odd} ? 'odd'">
+			<tr>
+				<td th:text="'' + ${iterationStatus.count}"></td>
+				<td th:text="'' + ${student.npm}"></td>
+				<td th:text="'' + ${student.name}"></td>
+				<td th:text="'' + ${student.gpa}"></td>
+				<td th:text="${student.gpa>=3.49}?'Cum Laude!':'Sangat Memuaskan'">Cum Laude</td>
+				<td>
+    					<a th:href="'/student/delete/' + ${student.npm}" ><span class="glyphicon glyphicon-cross"></span> Delete Data</a>
+					<a th:href="'/student/update/' + ${student.npm}" ><span class="glyphicon glyphicon-edit"></span> Update Data</a>
+				</td>
+			</tr>
+		</div>
+		</tbody>
+	</table>
+ 		<div th:replace="fragments/fragments :: footer"></div>
+    </body>
+</html>

@@ -33,17 +33,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .permitAll();
     }
 
-//    @Autowired
-//    public void configureGlobal (AuthenticationManagerBuilder auth) throws Exception
-//    {
-//        auth.inMemoryAuthentication()
-//                .withUser("admin").password("admin")
-//                .roles("ADMIN");
-//
-//        auth.inMemoryAuthentication()
-//                .withUser("user").password("user")
-//                .roles("USER");
-//    }
+    @Autowired
+    public void configureGlobal (AuthenticationManagerBuilder auth) throws Exception
+    {
+        auth.inMemoryAuthentication()
+                .withUser("admin").password("admin")
+                .roles("ADMIN");
+
+        auth.inMemoryAuthentication()
+                .withUser("user").password("user")
+                .roles("USER");
+    }
 
     @SuppressWarnings("deprecation")
     @Bean
